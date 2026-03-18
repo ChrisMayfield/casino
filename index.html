@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Casino Card Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+  </head>
+  <body>
+    <main id="app-root" class="app-shell">
+      <header class="hero panel">
+        <p class="eyebrow">Verdi White Family Ruleset</p>
+        <h1>Casino</h1>
+        <p class="subtitle">
+          Pass-and-play vanilla JavaScript implementation for 2 to 6 players with team scoring,
+          builds, freezing, penalties, and match rotation.
+        </p>
+      </header>
+
+      <section class="panel controls-panel">
+        <h2>Match Setup</h2>
+        <div class="setup-grid">
+          <label>
+            Player count
+            <select id="player-count">
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4" selected>4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </label>
+
+          <label>
+            Seed
+            <input id="seed-input" type="text" placeholder="Seed for deterministic shuffle" />
+          </label>
+
+          <button id="start-match" type="button" class="button-primary">Start Match</button>
+        </div>
+      </section>
+
+      <section class="panel status-panel">
+        <h2>Status</h2>
+        <div class="status-grid">
+          <p><strong>Game:</strong> <span id="status-game">Not started</span></p>
+          <p><strong>Round:</strong> <span id="status-round">-</span></p>
+          <p><strong>Turn:</strong> <span id="status-turn">-</span></p>
+          <p><strong>Current player:</strong> <span id="status-player">-</span></p>
+          <p><strong>Phase:</strong> <span id="status-phase">-</span></p>
+        </div>
+      </section>
+
+      <section class="board-grid">
+        <article class="panel table-panel">
+          <h2>Table</h2>
+          <h3>Loose Cards</h3>
+          <div id="table-loose" class="card-row"></div>
+          <h3>Builds</h3>
+          <div id="table-builds" class="build-list"></div>
+        </article>
+
+        <article class="panel hand-panel">
+          <h2>Current Hand</h2>
+          <div id="current-hand" class="card-row"></div>
+          <div id="pending-rook"></div>
+        </article>
+
+        <article class="panel action-panel">
+          <h2>Action Composer</h2>
+          <form id="action-form" class="action-form">
+            <label>
+              Action
+              <select id="action-type">
+                <option value="capture">Capture</option>
+                <option value="build">Build</option>
+                <option value="add">Add to Build</option>
+                <option value="freeze">Freeze Build</option>
+                <option value="refreeze">Refreeze Build</option>
+                <option value="table">Play to Table</option>
+              </select>
+            </label>
+
+            <div id="group-build-total">
+              <label>
+                Build total (1-14)
+                <input id="build-total" type="number" min="1" max="14" placeholder="14" />
+              </label>
+            </div>
+
+            <div id="group-rook-value" style="display: none">
+              <label>
+                Rook declared value (1-14)
+                <input id="rook-value" type="number" min="1" max="14" placeholder="Choose value" />
+              </label>
+            </div>
+
+            <div class="action-buttons">
+              <button type="submit" id="play-turn" class="button-primary">Play Turn</button>
+              <button type="button" id="clear-selection">Clear Selection</button>
+            </div>
+          </form>
+          <p id="action-message" class="message"></p>
+        </article>
+
+        <article class="panel score-panel">
+          <h2>Teams and Scores</h2>
+          <div id="team-scores" class="team-list"></div>
+        </article>
+
+        <article class="panel logs-panel">
+          <h2>Event Log</h2>
+          <ul id="event-log" class="event-log"></ul>
+        </article>
+
+        <article class="panel assumptions-panel">
+          <h2>Assumption Profile</h2>
+          <ul id="assumption-note" class="assumptions"></ul>
+        </article>
+
+        <article class="panel match-panel">
+          <h2>Match Progress</h2>
+          <ul id="match-summary" class="match-summary"></ul>
+          <button id="next-game" type="button">Start Next Game</button>
+          <p id="match-banner" class="match-banner"></p>
+        </article>
+      </section>
+    </main>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

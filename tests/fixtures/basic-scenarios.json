@@ -1,0 +1,16 @@
+{
+  "captureExamples": [
+    {
+      "name": "Seven captures two plus five",
+      "playValue": 7,
+      "tableValues": [2, 5],
+      "expectedLegal": true
+    },
+    {
+      "name": "Ten cannot capture three plus four",
+      "playValue": 10,
+      "tableValues": [3, 4],
+      "expectedLegal": false
+    }
+  ]
+}
